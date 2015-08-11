@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>FB shiz</title>
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+</head>
+<body>
+
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1152672198092601',
+            xfbml      : true,
+            version    : 'v2.4'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+
+<h1>FB crap</h1>
+<div
+        class="fb-like"
+        data-share="true"
+        data-width="450"
+        data-show-faces="true">
+</div>
+
+
+</body>
+
+<!--<button id="loginbutton" disabled="disabled">asd</button>-->
+
+<!--<script>-->
+
+<!--$(document).ready(function() {-->
+    <!--$.ajaxSetup({ cache: true });-->
+    <!--$.getScript('//connect.facebook.net/en_US/sdk.js', function(){-->
+        <!--FB.init({-->
+            <!--appId: '1152672198092601',-->
+            <!--version: 'v2.4' // or v2.0, v2.1, v2.0-->
+        <!--});-->
+    <!--$('#loginbutton,#feedbutton').removeAttr('disabled');-->
+    <!--FB.getLoginStatus();-->
+    <!--});-->
+<!--});-->
+<!--</script>-->
+
+
+<script>
+
+    $(function(){
+        $('h1').css('color', 'red');
+    });
+
+    $.ajax({
+        url: "https://graph.facebook.com/v2.4/bbcnews/feed?access_token=CAAQYWWjo5zkBAGeZBhBesMyjAZCZB2v7ahSCUawkv9VZAllKeX8fhA4NIhtlhs2pBxP44c7XUEPZCyvgZAowggMBGjTMGcIZAVpfBiZADVIlofOavaXYCPiRkPZCiOF4CONRk4vHE5YNXGqQll2fFkyxO5uxIOMCsyESRTeBDXudWrStoyUxNTxZBvAWsYY6WzrEAgN6pLi4Bm3PHzQC8Az3Ut",
+        context: document.body
+    }).done(function() {
+        $( this ).addClass( "done" );
+
+//        FB.init({
+//            appId: '1152672198092601',
+//            version: 'v2.4' // or v2.0, v2.1, v2.0-->
+//        });
+//
+//        FB.api(
+//                '/me',
+//                'GET',
+//                {"fields":"id,name, posts"},
+//                function(response) {
+//                    // Insert your code here
+//                    console.log("olala");
+//                    console.log(response);
+//                }
+//        );
+    });
+</script>
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
