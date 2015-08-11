@@ -1,115 +1,87 @@
-<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title>FB shiz</title>
-
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+        .fa-refresh {
+            display: block;
+            font-size: 40px;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
 
-
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '1152672198092601',
-            xfbml      : true,
-            version    : 'v2.4'
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-
-<h1>FB crap</h1>
-<div
-        class="fb-like"
-        data-share="true"
-        data-width="450"
-        data-show-faces="true">
+<div class="container">
+    <div class="col-xs-6" id="simpsons">
+        <h1>The Simpsons news</h1>
+        <div class="jumbotron">
+            <i class="fa fa-spin fa-refresh"></i>
+        </div>
+    </div>
+    <div class="col-xs-6" id="familyguy">
+        <h1>Family Guy news</h1>
+        <div class="jumbotron">
+            <i class="fa fa-spin fa-refresh"></i>
+        </div>
+    </div>
 </div>
 
-
-</body>
-
-<!--<button id="loginbutton" disabled="disabled">asd</button>-->
-
-<!--<script>-->
-
-<!--$(document).ready(function() {-->
-    <!--$.ajaxSetup({ cache: true });-->
-    <!--$.getScript('//connect.facebook.net/en_US/sdk.js', function(){-->
-        <!--FB.init({-->
-            <!--appId: '1152672198092601',-->
-            <!--version: 'v2.4' // or v2.0, v2.1, v2.0-->
-        <!--});-->
-    <!--$('#loginbutton,#feedbutton').removeAttr('disabled');-->
-    <!--FB.getLoginStatus();-->
-    <!--});-->
-<!--});-->
-<!--</script>-->
-
-
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script>
+    (function() {
+        var token = 'CAAQYWWjo5zkBAEzQuC3ZAaXCE7jdOfgd4qn4S2aoEASxBBY7TW2K1HSg2ekFMuD8uGzClFyn1Th7ImLH9fW1ZCyZB3jjwcHZBG0Y5mCyFrbXZCqRout8bUDSKqjihRm5aayuBIhTd5yvzGX3GS1ooL4doW6oCVsoBZBEZCqeGkwIziusLPlfjqiqqxIVfdLC3h42HNljUnjwG6X9U0HnXuO';
 
-    $(function(){
-        $('h1').css('color', 'red');
-    });
+        var connector = '?access_token=';
 
-    $.ajax({
-        url: "https://graph.facebook.com/v2.4/bbcnews/feed?access_token=CAAQYWWjo5zkBAGeZBhBesMyjAZCZB2v7ahSCUawkv9VZAllKeX8fhA4NIhtlhs2pBxP44c7XUEPZCyvgZAowggMBGjTMGcIZAVpfBiZADVIlofOavaXYCPiRkPZCiOF4CONRk4vHE5YNXGqQll2fFkyxO5uxIOMCsyESRTeBDXudWrStoyUxNTxZBvAWsYY6WzrEAgN6pLi4Bm3PHzQC8Az3Ut",
-        context: document.body
-    }).done(function() {
-        $( this ).addClass( "done" );
+        var baseURL = 'https://graph.facebook.com/v2.4/';
 
-//        FB.init({
-//            appId: '1152672198092601',
-//            version: 'v2.4' // or v2.0, v2.1, v2.0-->
-//        });
-//
-//        FB.api(
-//                '/me',
-//                'GET',
-//                {"fields":"id,name, posts"},
-//                function(response) {
-//                    // Insert your code here
-//                    console.log("olala");
-//                    console.log(response);
-//                }
-//        );
-    });
+        var makeAjax = function(fbUrl, next) {
+            $.ajax({
+                url: baseURL + fbUrl + connector + token,
+            }).done(function(data) {
+                next(data);
+            });
+        };
+
+        var bindSimpsons = function(data) {
+            domManipulation('#simpsons .jumbotron', data);
+        };
+
+        var bindFamilyguy = function(data) {
+            domManipulation('#familyguy .jumbotron', data);
+        };
+
+        var domManipulation = function(node, data) {
+            var html = '<ul>';
+
+            data.data.forEach(function(row) {
+                html += '<li><b>' + row.created_time + ':</b> ' + row.message + '</li>';
+            });
+
+            html += '</ul>';
+
+            $(node).html(html);
+        };
+
+        makeAjax('TheSimpsons/feed', bindSimpsons);
+        makeAjax('FamilyGuy/feed', bindFamilyguy);
+
+    })();
 </script>
-
-
+</body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
