@@ -36,11 +36,9 @@
 
         var baseURL = 'https://graph.facebook.com/v2.4/';
 
-        var complementURL = 'feed?fields=full_picture,created_time,message,link';
-
         var makeAjax = function(fbUrl, next) {
             $.ajax({
-                url: fbUrl,
+                url: baseURL + fbUrl + connector + token,
             }).done(function(data) {
                 next(data);
             });
@@ -59,18 +57,23 @@
 
             data.data.forEach(function(row) {
 
-                if(row.full_picture !== undefined){
-                    var postImage = row.full_picture;
+                var postImage = "";
+                var descroptionas = "";
+                var zinute = "";
+
+                if(row.picture !== undefined){
+                    postImage = row.picture;
                 }
 
-                html += '' +
-                '<li>' +
-                '<a href=" ' + row.link + ' ">' +
-                '<b>' + row.created_time + ':</b> ' +
-                row.message +
-                row.full_picture === undefined ? '' : ' <img class="img-responsive" src=" '+ row.full_picture +' ">' +
-                '</a>' +
-                '</li>';
+                if(row.description !== undefined){
+                    descroptionas = row.description;
+                }
+
+                if(row.message !== undefined){
+                    zinute = row.message;
+                }
+
+                html += '<li><a href=" ' + row.link + ' "> <b>' + row.created_time + ':</b> ' + zinute + descroptionas + ' <img class="img-responsive" src=" '+ postImage +' "> </a></li>';
             });
 
             html += '</ul>';
@@ -78,10 +81,20 @@
             $(node).html(html);
         };
 
-        makeAjax(baseURL + 'duzenos/' + complementURL + connector + token, bindSimpsons);
-        makeAjax(baseURL + 'sisaidgallery/' + complementURL + connector + token, bindFamilyguy);
+        makeAjax('duzenos/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+        makeAjax('sisaidgallery/feed?fields=picture,created_time,message,link,description', bindFamilyguy);
 
     })();
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
