@@ -32,7 +32,7 @@
     (function() {
         var token = 'CAAQYWWjo5zkBAOC2xmkF2BbPPVjreHZBU9ez1vJzOmqD6chd4ZCBAG0yVo2OpQuVvcGl6VYInzl0ytLI3CUjHPWZAtchOClJm0vUQykYFbtZB4KRfU1yVZCSyM6IZAhYWl8KFliRMUDmMrdzLOcS01DxvaN8fijHfzrMdqL9sXCPrlPpBr3VOBOTtnxhxjUHZAYGCB3NfPa9wZDZD';
 
-        var connector = '?access_token=';
+        var connector = '&access_token=';
 
         var baseURL = 'https://graph.facebook.com/v2.4/';
 
@@ -56,7 +56,7 @@
             var html = '<ul>';
 
             data.data.forEach(function(row) {
-                html += '<li><b>' + row.created_time + ':</b> ' + row.message + '</li>';
+                html += '<li><b>' + row.created_time + ':</b> ' + row.message + row.full_picture + '</li>';
             });
 
             html += '</ul>';
@@ -64,8 +64,8 @@
             $(node).html(html);
         };
 
-        makeAjax('duzenos/feed', bindSimpsons);
-        makeAjax('sisaidgallery/feed', bindFamilyguy);
+        makeAjax('duzenos/feed?fields=full_picture', bindSimpsons);
+        makeAjax('sisaidgallery/feed?fields=full_picture', bindFamilyguy);
 
     })();
 </script>
