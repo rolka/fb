@@ -56,7 +56,7 @@
             var html = '<ul>';
 
             data.data.forEach(function(row) {
-                html += '<li><b>' + row.created_time + ':</b> ' + row.message + row.full_picture + '</li>';
+                html += '<li> <a href=" ' + row.link + ' "> <b>' + row.created_time + ':</b> ' + row.message + ' <img class="img-responsive" src=" '+ row.full_picture +' "> </a></li>';
             });
 
             html += '</ul>';
@@ -64,8 +64,8 @@
             $(node).html(html);
         };
 
-        makeAjax('duzenos/feed?fields=full_picture', bindSimpsons);
-        makeAjax('sisaidgallery/feed?fields=full_picture', bindFamilyguy);
+        makeAjax('duzenos/feed?fields=full_picture,created_time,message,link', bindSimpsons);
+        makeAjax('sisaidgallery/feed?fields=full_picture,created_time,message,link', bindFamilyguy);
 
     })();
 </script>
