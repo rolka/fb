@@ -36,9 +36,11 @@
 
         var baseURL = 'https://graph.facebook.com/v2.4/';
 
+        var complementURL = 'feed?fields=full_picture,created_time,message,link';
+
         var makeAjax = function(fbUrl, next) {
             $.ajax({
-                url: baseURL + fbUrl + connector + token,
+                url: fbUrl,
             }).done(function(data) {
                 next(data);
             });
@@ -66,7 +68,7 @@
                 '<a href=" ' + row.link + ' ">' +
                 '<b>' + row.created_time + ':</b> ' +
                 row.message +
-                row.full_picture === undefined ? '' : ' <img class="img-responsive" src=" '+ row.full_picture +' ">'
+                row.full_picture === undefined ? '' : ' <img class="img-responsive" src=" '+ row.full_picture +' ">' +
                 '</a>' +
                 '</li>';
             });
@@ -76,8 +78,8 @@
             $(node).html(html);
         };
 
-        makeAjax('duzenos/feed?fields=full_picture,created_time,message,link', bindSimpsons);
-        makeAjax('sisaidgallery/feed?fields=full_picture,created_time,message,link', bindFamilyguy);
+        makeAjax(baseURL + 'duzenos/' + complementURL + connector + token, bindSimpsons);
+        makeAjax(baseURL + 'sisaidgallery/' + complementURL + connector + token, bindFamilyguy);
 
     })();
 </script>
