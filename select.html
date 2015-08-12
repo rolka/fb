@@ -1,1 +1,101 @@
 
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+        .fa-refresh {
+            display: block;
+            font-size: 40px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="col-xs-6" id="simpsons">
+        <h1>The Duzenos news</h1>
+        <div class="jumbotron">
+            <i class="fa fa-spin fa-refresh"></i>
+        </div>
+    </div>
+    <div class="col-xs-6" id="familyguy">
+        <h1>sisaidgallery news</h1>
+        <div class="jumbotron">
+            <i class="fa fa-spin fa-refresh"></i>
+        </div>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    (function() {
+        var token = 'CAAQYWWjo5zkBABHrv8l9wy9HEZAMpIhqAf7c1qlp31oSTZCVXLSsg3ZBhpFVPVdsTTA5zwG6Su0zJeJqnwjnYz4raepCiwaLDBDIU4w63g1i3LOiSdpMwaAo7fBz0jc1H3ot0hT6ZCpGMTSswpQao3lu3CNb5HzZBzdPZAQkowPLUpbLlMTCZC8NLB8ehuW3YZBPL95SkfP3WQZDZD';
+
+        var connector = '&access_token=';
+
+        var baseURL = 'https://graph.facebook.com/v2.4/';
+
+        var makeAjax = function(fbUrl, next) {
+            $.ajax({
+                url: baseURL + fbUrl + connector + token,
+            }).done(function(data) {
+                next(data);
+            });
+        };
+
+        var bindSimpsons = function(data) {
+            domManipulation('#simpsons .jumbotron', data);
+        };
+
+        var bindFamilyguy = function(data) {
+            domManipulation('#familyguy .jumbotron', data);
+        };
+
+        var domManipulation = function(node, data) {
+            var html = '<ul>';
+
+            data.data.forEach(function(row) {
+
+                var postImage = "";
+                var descroptionas = "";
+                var zinute = "";
+
+                if(row.picture !== undefined){
+                    postImage = row.picture;
+                }
+
+                if(row.description !== undefined){
+                    descroptionas = row.description;
+                }
+
+                if(row.message !== undefined){
+                    zinute = row.message;
+                }
+
+                html += '<li><a href=" ' + row.link + ' "> <b>' + row.created_time + ':</b> ' + zinute + descroptionas + ' <img class="img-responsive" src=" '+ postImage +' "> </a></li>';
+            });
+
+            html += '</ul>';
+
+            $(node).html(html);
+        };
+
+        makeAjax('duzenos/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+        makeAjax('sisaidgallery/feed?fields=picture,created_time,message,link,description', bindFamilyguy);
+
+    })();
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
