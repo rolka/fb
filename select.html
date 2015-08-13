@@ -15,6 +15,11 @@
             font-size: 40px;
             text-align: center;
         }
+
+        html {
+            overflow-y:scroll;
+        }
+
     </style>
 </head>
 <body>
@@ -155,7 +160,7 @@
 
 //                html += '<li> <a href=" ' + row.link + ' "> <b>' + row.created_time + ':</b> ' + zinute + descroptionas + ' <img class="img-responsive" src=" '+ postImage +' "> </a></li>';
 
-                html += '<div class="row"><div class="col s12 m12"><div class="card blue-grey darken-1 hoverable"><div class="card-content white-text"><span class="card-title" style="font-size: 14px;">Posted at: '+ Date.create(row.created_time).format('{HH}:{mm}, {Weekday}, {d} {Month}, {yyyy}') +' </span>   <div class="row"><div class="col s2"><p><img src=" '+ postImage +' " alt=""/></p></div>    <div class="col s10"><h5 style="margin-top: 0;"> '+ zinute +' </h5><p> '+ descroptionas +' </p></div></div>   </div><div class="card-action"><a target="_blank" href=" '+ row.link +' ">Open post<i class="material-icons" style="position: relative;top: 3px; font-size: 16px; padding-left: 5px;">launch</i></a></div></div></div></div>'
+                html += '<div class="row"><div class="col s12 m12"><div class="card blue-grey darken-1 hoverable"><div class="card-content white-text"><span class="card-title" style="font-size: 14px;">Posted at: '+ Date.create(row.created_time).format('{HH}:{mm}, {Weekday}, {d} {Month}, {yyyy}') +' </span>   <div class="row"><div class="col s2"><p><img class="responsive-img" src=" '+ postImage +' " alt=""/></p></div>    <div class="col s10"><h5 style="margin-top: 0;"> '+ zinute +' </h5><p> '+ descroptionas +' </p></div></div>   </div><div class="card-action"><a target="_blank" href=" '+ row.link +' ">Open post<i class="material-icons" style="position: relative;top: 3px; font-size: 16px; padding-left: 5px;">launch</i></a></div></div></div></div>'
 
             });
 
@@ -167,8 +172,8 @@
         var ola = $('#first_name2').val();
         var selectVal = $('#select-options > li > span').val();
         var selectValOption = $('.select-fb-acc').val();
-        console.log("selectVal is: " + selectVal);
-        console.log("selectValOption is: " + selectValOption)
+//        console.log("selectVal is: " + selectVal);
+//        console.log("selectValOption is: " + selectValOption);
 
 
         $( ".select-fb-acc" ).change(function() {
@@ -186,24 +191,25 @@
 
         });
 
-
-
         $( ".waves-light" ).click(function() {
-            $('#simpsons').hide();
 
             var ola = $('#first_name2').val();
-            console.log("value is: " + ola);
-            makeAjax( ola + '/feed?fields=picture,created_time,message,link,description', bindSimpsons);
 
-//            var selectTextValue = $( "#first_name2").val();
-            $('#posts-acc-title').text(ola + ' posts');
+            if( ola !== "" ){
+                $('#posts-acc-title').text(ola + ' posts');
+                $('#simpsons').hide();
+                makeAjax( ola + '/feed?fields=picture,created_time,message,link,description', bindSimpsons);
 
-            setTimeout(function(){
-                $('#simpsons').fadeIn('500');
-            }, 600);
+                setTimeout(function(){
+                    $('#simpsons').fadeIn('500');
+                }, 600);
+
+            }
+            else{
+                alert('Please enter slug');
+            }
 
         });
-
 
         makeAjax('duzenos/feed?fields=picture,created_time,message,link,description', bindSimpsons);
 //        makeAjax('sisaidgallery/feed?fields=picture,created_time,message,link,description', bindFamilyguy);
