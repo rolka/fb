@@ -47,17 +47,23 @@
                 <label class="active" for="first_name2">Enter Facebook page slug</label>
             </div>
 
+            <!--<i class="material-icons prefix">reorder</i>-->
             <div class="input-field col s6">
-                <select>
+                <select class="select-fb-acc">
                     <option value="" disabled selected>Choose your option</option>
-                    <option value="1">Option 1</option>
-                    <option value="2">Option 2</option>
-                    <option value="3">Option 3</option>
+                    <option value="sisaidgallery">sisaidgallery</option>
+                    <option value="duzenos">Duzenos</option>
+                    <option value="bbcnews">BBC News</option>
+                    <option value="Klaipeda.renginiai">Renginiai Klaipeda</option>
+                    <option value="PORTbyBarBara">PORT night club by BarBar'a</option>
+                    <option value="Kastonas">Kaštonas/ChestNut</option>
+                    <option value="klaipedosdramosteatras">Klaipėdos dramos teatras</option>
+                    <option value="238899589464193">Žvejų Baras</option>
                 </select>
-                <label>Materialize Select</label>
+                <label>Or choose one of the following</label>
             </div>
 
-            <div class="input-field col s6">
+            <div class="input-field col s12">
                 <a class="waves-effect waves-light btn"><i class="material-icons right">zoom_in</i>Show posts</a>
             </div>
 
@@ -68,7 +74,7 @@
 
 <div class="container">
     <div class="col-xs-6" id="simpsons">
-        <h3 class="center-align">Posts</h3>
+        <h3 class="center-align" id="posts-acc-title">Duzenos posts</h3>
         <div class="jumbotron">
             <i class="fa fa-spin fa-refresh"></i>
         </div>
@@ -94,12 +100,17 @@
         $('.preloader-wrap-cust').delay(1500).fadeIn();
     });
 
+    $(document).ready(function() {
+        $('select').material_select();
+    });
+
+
 </script>
 
 
 <script>
     (function() {
-        var token = 'CAAQYWWjo5zkBAEgqFTZCQLByWrSVKi7tx0a46ZATdvmFXNS6KLXQfXfBu8FRXE9Ic09HoTVZC9t6PctQu4ZAF3zKuTUPV53QpQ0glG4uLsRYTX7jxII6tvSRf9EDdioj3cSETbJgHThKZBf72N1nAEGpRW8WW5coite6su9eATrZByvBsZAwgOlhdwY7YL8l5fxOlNYVatKUwZDZD';
+        var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
 
         var connector = '&access_token=';
 
@@ -154,13 +165,43 @@
         };
 
         var ola = $('#first_name2').val();
-        console.log("value is: " + ola);
+        var selectVal = $('#select-options > li > span').val();
+        var selectValOption = $('.select-fb-acc').val();
+        console.log("selectVal is: " + selectVal);
+        console.log("selectValOption is: " + selectValOption)
+
+
+        $( ".select-fb-acc" ).change(function() {
+
+            $('#simpsons').hide();
+
+            var selectValueHere = ($(this).val());
+            var selectTextValue = $( ".select-fb-acc option:selected").text();
+            makeAjax( selectValueHere + '/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+            $('#posts-acc-title').text(selectTextValue + ' posts');
+
+            setTimeout(function(){
+                $('#simpsons').fadeIn('500');
+            }, 600);
+
+        });
+
+
 
         $( ".waves-light" ).click(function() {
-//            alert( ola );
+            $('#simpsons').hide();
+
             var ola = $('#first_name2').val();
             console.log("value is: " + ola);
             makeAjax( ola + '/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+
+//            var selectTextValue = $( "#first_name2").val();
+            $('#posts-acc-title').text(ola + ' posts');
+
+            setTimeout(function(){
+                $('#simpsons').fadeIn('500');
+            }, 600);
+
         });
 
 
