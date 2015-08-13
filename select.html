@@ -46,31 +46,42 @@
 
     <div class="container">
         <div class="row">
-            <div class="input-field col s6">
-                <i class="material-icons prefix">error_outline</i>
-                <input value="" id="first_name2" type="text" class="validate">
-                <label class="active" for="first_name2">Enter Facebook page slug</label>
-            </div>
+
+            <form>
+
+                <div class="input-field col s6">
+                    <i class="material-icons prefix">error_outline</i>
+                    <input value="" id="first_name2" type="text" class="validate">
+                    <label class="active" for="first_name2">Enter Facebook page slug</label>
+                </div>
 
             <!--<i class="material-icons prefix">reorder</i>-->
-            <div class="input-field col s6">
-                <select class="select-fb-acc">
-                    <option value="" disabled selected>Choose your option</option>
-                    <option value="sisaidgallery">sisaidgallery</option>
-                    <option value="duzenos">Duzenos</option>
-                    <option value="bbcnews">BBC News</option>
-                    <option value="Klaipeda.renginiai">Renginiai Klaipeda</option>
-                    <option value="PORTbyBarBara">PORT night club by BarBar'a</option>
-                    <option value="Kastonas">Kaštonas/ChestNut</option>
-                    <option value="klaipedosdramosteatras">Klaipėdos dramos teatras</option>
-                    <option value="238899589464193">Žvejų Baras</option>
-                </select>
-                <label>Or choose one of the following</label>
-            </div>
+                <div class="input-field col s6">
+                    <select class="select-fb-acc">
+                        <option value="" disabled selected>Choose your option</option>
+                        <option value="sisaidgallery">sisaidgallery</option>
+                        <option value="duzenos">Duzenos</option>
+                        <option value="bbcnews">BBC News</option>
+                        <option value="Klaipeda.renginiai">Renginiai Klaipeda</option>
+                        <option value="PORTbyBarBara">PORT night club by BarBar'a</option>
+                        <option value="Kastonas">Kaštonas/ChestNut</option>
+                        <option value="klaipedosdramosteatras">Klaipėdos dramos teatras</option>
+                        <option value="238899589464193">Žvejų Baras</option>
+                    </select>
+                    <label>Or choose one of the following</label>
+                </div>
 
-            <div class="input-field col s12">
-                <a class="waves-effect waves-light btn"><i class="material-icons right">zoom_in</i>Show posts</a>
-            </div>
+                <!--<div class="input-field col s12">-->
+                    <!--<a class="waves-effect waves-light btn"><i class="material-icons right">zoom_in</i>Show posts</a>-->
+                <!--</div>-->
+
+                <div class="input-field col s12">
+                    <button class="btn waves-effect waves-light" type="submit" name="action">Show posts
+                        <i class="material-icons right">zoom_in</i>
+                    </button>
+                </div>
+
+            </form>
 
         </div>
     </div>
@@ -191,7 +202,9 @@
 
         });
 
-        $( ".waves-light" ).click(function() {
+        $( ".waves-light" ).click(function(event) {
+
+            event.preventDefault();
 
             var ola = $('#first_name2').val();
 
