@@ -186,7 +186,7 @@
 
             var selectTextValue = $( ".select-fb-acc option:selected").text();
             
-            makeAjax(event.target.value + '/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+            makeAjax(event.target.value + '/feed?fields=picture,created_time,message,link,description&limit=50', bindSimpsons);
 
             $('#posts-acc-title').text(selectTextValue + ' posts');
         });
@@ -200,7 +200,7 @@
             if( ola !== "" ){
                 $('#posts-acc-title').text(ola + ' posts');
                 $('#simpsons').hide();
-                makeAjax( ola + '/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+                makeAjax( ola + '/feed?fields=picture,created_time,message,link,description&limit=50', bindSimpsons);
 
                 setTimeout(function(){
                     $('#simpsons').fadeIn('500');
@@ -220,7 +220,7 @@
 
         });
 
-        makeAjax('duzenos/feed?fields=picture,created_time,message,link,description', bindSimpsons);
+        makeAjax('duzenos/feed?fields=picture,created_time,message,link,description&limit=50', bindSimpsons);
 
     })();
 </script>
