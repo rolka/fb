@@ -70,7 +70,7 @@
                         <option value="Kastonas">Kaštonas/ChestNut</option>
                         <option value="klaipedosdramosteatras">Klaipėdos dramos teatras</option>
                         <option value="238899589464193">Žvejų Baras</option>
-                        <option value="asdfoiasdfkl233900asdfa">I don't exist</option>
+                        <!--<option value="asdfoiasdfkl233900asdfa">I don't exist</option>-->
                     </select>
                     <label>Or choose one of the following</label>
                 </div>
@@ -120,7 +120,7 @@
             }).done(function(data) {
                 next(data);
             }).error(function() {
-                alert('thing does not exist');
+                alert('Facebook page not found');
             });
         };
 
