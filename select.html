@@ -7,6 +7,9 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.css" rel="stylesheet">
+
     <link rel="icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
 
@@ -103,10 +106,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
+
 <script>
     (function() {
 
         $('select').material_select();
+
+//        swal({   title: "Error!",   text: "Here's my error message!",   type: "error",   confirmButtonText: "Cool" });
+
+
 
         var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
 
@@ -120,7 +129,14 @@
             }).done(function(data) {
                 next(data);
             }).error(function() {
-                alert('Facebook page not found');
+                swal({
+                    title: "Oops...",
+                    text: "Facebook page not found",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    type: 'error'
+                    // warning success info error
+                });
             });
         };
 
@@ -192,7 +208,14 @@
 
             }
             else{
-                alert('Please enter slug');
+                swal({
+                    title: "Oops...",
+                    text: "Please enter slug",
+                    timer: 2000,
+                    showConfirmButton: false,
+                    type: 'warning'
+                    // warning success info error
+                });
             }
 
         });
