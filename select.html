@@ -1,27 +1,23 @@
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    
-    <title>Mėmelio Žirafos - Facebook feeds page</title>
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
     <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
     <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.css" rel="stylesheet">
 
     <link rel="icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
     <link rel="shortcut icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Mėmelio Žirafos - Facebook feeds page</title>
+
     <style>
         html {
             overflow-y:scroll;
         }
-
         header {
             margin-bottom: 50px;
         }
-
         .progress {
             top: 50%;
             width: 50%;
@@ -48,9 +44,7 @@
 
     <div class="container">
         <div class="row">
-
             <form>
-
                 <div class="input-field col s6">
                     <i class="material-icons prefix">error_outline</i>
                     <input value=""
@@ -61,7 +55,6 @@
                         Enter Facebook page slug
                     </label>
                 </div>
-
                 <div class="input-field col s6">
                     <select class="select-fb-acc">
                         <option value="" disabled selected>Choose your option</option>
@@ -77,7 +70,6 @@
                     </select>
                     <label>Or choose one of the following</label>
                 </div>
-
                 <div class="input-field col s12">
                     <button type="submit"
                             name="action"
@@ -85,27 +77,21 @@
                         Show posts <i class="material-icons right">zoom_in</i>
                     </button>
                 </div>
-
             </form>
-
         </div>
     </div>
-
     <div class="container">
         <div class="col-xs-6" id="simpsons">
             <h3 class="center-align" id="posts-acc-title">Duzenos posts</h3>
             <div id="fbdata">
-                
             </div>
         </div>
     </div>
-
 </div>
 
 <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
 
 <script>
@@ -114,9 +100,7 @@
         $('select').material_select();
 
         var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
-
         var connector = '&access_token=';
-
         var baseURL = 'https://graph.facebook.com/v2.4/';
 
         var makeAjax = function(fbUrl, next) {
@@ -215,11 +199,8 @@
                     // warning success info error
                 });
             }
-
         });
-
         makeAjax('duzenos/feed?fields=picture,created_time,message,link,description&limit=50', bindSimpsons);
-
     })();
 </script>
 </body>
