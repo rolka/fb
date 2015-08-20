@@ -32,6 +32,7 @@
 </div>
 
 <div class="preloader-wrap-cust hide">
+    <!--header-->
     <header>
         <nav class="top-nav">
             <div class="container">
@@ -41,43 +42,21 @@
             </div>
         </nav>
     </header>
+    <!--end header-->
 
     <div class="container">
         <div class="row">
             <form>
-                <div class="input-field col s6">
-                    <i class="material-icons prefix">error_outline</i>
-                    <input value=""
-                           type="text"
-                           id="first_name2"
-                           class="validate">
-                    <label class="active" for="first_name2">
-                        Enter Facebook page slug
-                    </label>
-                </div>
-                <div class="input-field col s6">
-                    <select class="select-fb-acc">
-                        <option value="" disabled selected>Choose your option</option>
-                        <option value="sisaidgallery">sisaidgallery</option>
-                        <option value="duzenos">Duzenos</option>
-                        <option value="bbcnews">BBC News</option>
-                        <option value="Klaipeda.renginiai">Renginiai Klaipeda</option>
-                        <option value="PORTbyBarBara">PORT night club by BarBar'a</option>
-                        <option value="Kastonas">Kaštonas/ChestNut</option>
-                        <option value="klaipedosdramosteatras">Klaipėdos dramos teatras</option>
-                        <option value="238899589464193">Žvejų Baras</option>
-                        <!--<option value="asdfoiasdfkl233900asdfa">I don't exist</option>-->
-                    </select>
-                    <label>Or choose one of the following</label>
-                </div>
-
+                <!--checkbox to show all posts or events only-->
                 <div class="col s6">
                     <p>
                         <input type="checkbox" id="events-only" />
                         <label for="events-only">Show events only</label>
                     </p>
                 </div>
+                <!--end checkbox-->
 
+                <!--show posts button-->
                 <div class="input-field col s12">
                     <button type="submit"
                             name="action"
@@ -85,14 +64,18 @@
                         Show posts <i class="material-icons right">zoom_in</i>
                     </button>
                 </div>
+                <!--end show posts button-->
             </form>
         </div>
     </div>
     <div class="container">
-        <div class="col-xs-6" id="simpsons">
-            <h3 class="center-align" id="posts-acc-title">Duzenos posts</h3>
-            <div id="fbdata">
+        <div class="row">
+            <!--posts wrapper-->
+            <div class="col s12" id="simpsons">
+                <h3 class="center-align" id="posts-acc-title">Duzenos posts</h3>
+                <div id="fbdata"></div>
             </div>
+            <!--end posts wrapper-->
         </div>
     </div>
 </div>
@@ -104,6 +87,45 @@
 
 <script>
     (function() {
+
+        // slugs
+        var sisaidgallery = {
+            value: "sisaidgallery",
+            text: "sisaid galerija"
+        }
+
+        var duzenos = {
+            value: "duzenos",
+            text: "Duženos"
+        }
+
+        var bbcnews = {
+            value: "bbcnews",
+            text: "BBC News"
+        }
+
+        var klaipedaRenginiai = {
+            value: "Klaipeda.renginiai",
+            text: "Renginiai Klaipėda"
+        }
+
+        var PORTbyBarBara = {
+            value: "PORTbyBarBara",
+            text: "PORT night club by BarBar'a"
+        }
+        var kastonas = {
+            value: "Kastonas",
+            text: "Kaštonas/ChestNut"
+        }
+        var klaipedosdramosteatras = {
+            value: "klaipedosdramosteatras",
+            text: "Klaipėdos dramos teatras"
+        }
+        var zvejuBaras = {
+            value: "238899589464193",
+            text: "Žvejų Baras"
+        }
+
 
         $('select').material_select();
 
