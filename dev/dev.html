@@ -166,6 +166,14 @@ comment out temporary
             return getIncompleteSlugs.length < 1;
         };
 
+        var makeURL = function(url, token, slug){
+            return url.replace('{token}', token).replace('{slug}', slug);
+        };
+        console.log(makeURL(baseURL, token, 'duzenos'));
+
+
+
+
         var showlAllPosts = function(){
             /*
              * Jose's comments
