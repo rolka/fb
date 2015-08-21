@@ -169,9 +169,11 @@ comment out temporary
         var makeURL = function(url, token, slug){
             return url.replace('{token}', token).replace('{slug}', slug);
         };
-        console.log(makeURL(baseURL, token, 'duzenos'));
+//        console.log(makeURL(baseURL, token, 'duzenos'));
 
-
+        var template = `
+        <html>goes here</html>
+        `;
 
 
         var showlAllPosts = function(){
