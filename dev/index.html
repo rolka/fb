@@ -205,33 +205,37 @@
         slugs.forEach(function(slug) {
           makeAjax(makeURL(baseURL, token, slug.slug), showAllPosts, slug.slug);
         });
-      };
-
-
-      var showlAllPosts = function(){
-        /*
-         * Jose's comments
-         *
-         * make ajax call 1
-         * make ajax call 2
-         * figure out when both calls have complete
-         * merge the data from both calls
-         * sort the the merged data by date
-         */
-      };
-
-
-      var isChecked = function(selector) {
-
-        return $(selector).is(':checked');
 
       };
+
+
+      var showlAllPosts = function(data, slug){
+
+        if(allComplete()) {
+          // merge all data, sort all data and
+          // call the renderTemplateFunction
+
+          // finally hide the progress bar
+          $('.progress').fadeOut();
+          $('#content').removeClass('hide');
+        }
+        else {
+
+        }
+      };
+
 
       /*
-       * hide preloader
+       * Listen to the change in the checkbox
        */
-      $('.progress').fadeOut();
-      $('#content').removeClass('hide');
+      $('#events-only').change(function() {
+        if($(this).is(':checked')) {
+          // hide the non events with css
+        }
+        else {
+          // show the non events with css
+        }
+      });
 
     })();
   </script>
