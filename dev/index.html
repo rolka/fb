@@ -1,231 +1,239 @@
 <html lang="en-US">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
+  <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.css" rel="stylesheet">
 
-    <link rel="icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
-    <link rel="shortcut icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
+  <link rel="icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="http://www.mzirafos.lt/favicon.ico" type="image/x-icon" />
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mėmelio Žirafos - Facebook feeds page</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Mėmelio Žirafos - Facebook feeds page</title>
 
-    <style>
-        html {
-            overflow-y:scroll;
-        }
-        header {
-            margin-bottom: 50px;
-        }
-        .progress {
-            top: 50%;
-            width: 50%;
-            margin: 0 auto;
-        }
-    </style>
+  <style>
+    html {
+      overflow-y:scroll;
+    }
+    header {
+      margin-bottom: 50px;
+    }
+    .progress {
+      top: 50%;
+      width: 50%;
+      margin: 0 auto;
+    }
+  </style>
 </head>
 <body>
 
-    <div class="progress">
-        <div class="indeterminate"></div>
-    </div>
+  <div class="progress">
+    <div class="indeterminate"></div>
+  </div>
 
-    <div class="hide" id="content">
-        <!--header-->
-        <header>
-            <nav class="top-nav">
-                <div class="container">
-                    <div class="nav-wrapper">
-                        <p>Mėmelio Žirafos Facebook feeds page</p>
-                    </div>
-                </div>
-            </nav>
-        </header>
-        <!--end header-->
-
+  <div class="hide" id="content">
+    <!--header-->
+    <header>
+      <nav class="top-nav">
         <div class="container">
-            <div class="row">
-                <!--checkbox to show all posts or events only-->
-                <div class="col s6">
-                    <p>
-                        <input type="checkbox" id="events-only" />
-                        <label for="events-only">Show events only</label>
-                    </p>
-                </div>
-                <!--end checkbox-->
-            </div>
-            <div class="row">
-                <h3 class="center-align" id="posts-acc-title">Facebook posts</h3>
-                <!--posts wrapper-->
-                <div class="col s12" id="fb-posts-wrap"></div>
-                <!--end posts wrapper-->
-            </div>
+          <div class="nav-wrapper">
+            <p>Mėmelio Žirafos Facebook feeds page</p>
+          </div>
         </div>
+      </nav>
+    </header>
+    <!--end header-->
+
+    <div class="container">
+      <div class="row">
+        <!--checkbox to show all posts or events only-->
+        <div class="col s6">
+          <p>
+            <input type="checkbox" id="events-only" />
+            <label for="events-only">Show events only</label>
+          </p>
+        </div>
+        <!--end checkbox-->
+      </div>
+      <div class="row">
+        <h3 class="center-align" id="posts-acc-title">Facebook posts</h3>
+        <!--posts wrapper-->
+        <div class="col s12" id="fb-posts-wrap"></div>
+        <!--end posts wrapper-->
+      </div>
     </div>
+  </div>
 
-    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
 
-    <script>
-        (function() {
+  <script>
+    (function() {
 
-            /*
-             * Our Globals
-             */
+      /*
+       * Our Globals
+       */
 
-            var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
+      var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
 
-            var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
+      var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
 
-            var slugs = [
-                {
-                    slug: 'sisaidgallery',
-                    complete: false
-                },
-                {
-                    slug: 'duzenos',
-                    complete: false
-                },
-                {
-                    slug: 'bbcnews',
-                    complete: false
-                },
-                {
-                    slug: 'Klaipeda.renginiai',
-                    complete: false
-                },
-                {
-                    slug: 'PORTbyBarBara',
-                    complete: false
-                },
-                {
-                    slug: 'Kastonas',
-                    complete: false
-                },
-                {
-                    slug: 'klaipedosdramosteatras',
-                    complete: false
-                },
-                {
-                    slug: '238899589464193',
-                    complete: false
-                }
-            ];
+      var slugs = [
+        {
+          slug: 'sisaidgallery',
+          complete: false
+        },
+        {
+          slug: 'duzenos',
+          complete: false
+        },
+        {
+          slug: 'bbcnews',
+          complete: false
+        },
+        {
+          slug: 'Klaipeda.renginiai',
+          complete: false
+        },
+        {
+          slug: 'PORTbyBarBara',
+          complete: false
+        },
+        {
+          slug: 'Kastonas',
+          complete: false
+        },
+        {
+          slug: 'klaipedosdramosteatras',
+          complete: false
+        },
+        {
+          slug: '238899589464193',
+          complete: false
+        }
+      ];
 
-            /*
-             * getIncompleteSlugs
-             */
-            var getIncompleteSlugs = slugs.filter(function(obj) {
-                return obj.complete === false;
-            });
+      /*
+       * getIncompleteSlugs
+       */
+      var getIncompleteSlugs = slugs.filter(function(obj) {
+        return obj.complete === false;
+      });
 
-            /*
-             * allComplete
-             */
-            var allComplete = function() {
-                return getIncompleteSlugs.length < 1;
-            };
+      /*
+       * allComplete
+       */
+      var allComplete = function() {
+        return getIncompleteSlugs.length < 1;
+      };
 
-            /*
-             * makeURL
-             */
-            var makeURL = function(url, token, slug){
-                return url.replace('{token}', token).replace('{slug}', slug);
-            };
+      /*
+       * makeURL
+       */
+      var makeURL = function(url, token, slug){
+        return url.replace('{token}', token).replace('{slug}', slug);
+      };
 
-            /*
-             * template
-             */
-            var template = '' +
-                '<div class="card blue-grey darken-1">' +
-                    '<div class="card-content white-text">' +
-                        '<span>{fb-post-date}</span>' +
-                        '<div class="row">' +
-                            '<div class="col s2">' +
-                                '<img class="responsive-img" src="{fb-image}" alt=""/>' +
-                            '</div>' +
-                            '<div class="col s10">' +
-                                '<span class="card-title">{fb-post-title}</span>' +
-                                '<p>{fb-post-text}</p>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                    '<div class="card-action">' +
-                        '<a href="{fb-post-link}">Open post</a>' +
-                    '</div>' +
-                '</div>'
-            ;
+      /*
+       * Date formatter
+       */
+      var dateFormatter = function(date) {
+        var dateFormat = '{HH}:{mm}, {Weekday}, {d} {Month}, {yyyy}';
+        return Date.create(date).format(dateFormat);
+      }
 
-            /*
-             * bindTemplate
-             */
-            var bindTemplate = function(template, obj){
+      /*
+       * template
+       */
+       var template = '' +
+        '<div class="card blue-grey darken-1">' +
+          '<div class="card-content white-text">' +
+            '<span>{fb-post-date}</span>' +
+            '<div class="row">' +
+              '<div class="col s2">' +
+                '<img class="responsive-img" src="{fb-image}" alt=""/>' +
+              '</div>' +
+              '<div class="col s10">' +
+                '<span class="card-title">{fb-post-title}</span>' +
+                '<p>{fb-post-text}</p>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+          '<div class="card-action">' +
+            '<a href="{fb-post-link}">Open post</a>' +
+          '</div>' +
+        '</div>';
 
-                return url
-                    .replace('{fb-image}', obj.picture)
-                    .replace('{fb-post-title}', obj.description)
-                    .replace('{fb-post-text}', obj.message)
-                    .replace('{fb-post-link}', obj.link)
-                    .replace('{fb-post-date}', Date.create(obj.created_time).format('{HH}:{mm}, {Weekday}, {d} {Month}, {yyyy}'));
+      /*
+       * bindTemplate
+       */
+       var bindTemplate = function(template, obj){
 
-            };
+        return url
+          .replace('{fb-image}', obj.picture)
+          .replace('{fb-post-title}', obj.description)
+          .replace('{fb-post-text}', obj.message)
+          .replace('{fb-post-link}', obj.link)
+          .replace('{fb-post-date}', dateFormatter(obj.created_time));
 
-            var makeAjax = function(fbUrl, next, slug) {
-                $.ajax({
-                    url: fbUrl
-                }).done(function(data) {
-                    next(data, slug);
-                });
-            };
+      };
 
-            var html = "";
+      var makeAjax = function(fbUrl, next, slug) {
+        $.ajax({
+          url: fbUrl
+        }).done(function(data) {
+          next(data, slug);
+        });
+      };
 
-            /*
-             * renderTemplate
-             */
-            var renderTemplate = function(){
-                $('#fb-posts-wrap').html(html);
-            };
+      var html = "";
 
-            /*
-             * makeAjaxCalls
-             */
-            var makeAjaxCalls = function(slugs){
+      /*
+       * renderTemplate
+       */
+      var renderTemplate = function(){
+        $('#fb-posts-wrap').html(html);
+      };
 
-                // here you go, my friend :)
+      /*
+       * makeAjaxCalls
+       */
+      var makeAjaxCalls = function(slugs){
 
-            };
+        // here you go, my friend :)
 
-
-            var showlAllPosts = function(){
-                /*
-                 * Jose's comments
-                 *
-                 * make ajax call 1
-                 * make ajax call 2
-                 * figure out when both calls have complete
-                 * merge the data from both calls
-                 * sort the the merged data by date
-                 */
-            };
+      };
 
 
-            var isChecked = function(selector) {
+      var showlAllPosts = function(){
+        /*
+         * Jose's comments
+         *
+         * make ajax call 1
+         * make ajax call 2
+         * figure out when both calls have complete
+         * merge the data from both calls
+         * sort the the merged data by date
+         */
+      };
 
-                return $(selector).is(':checked');
 
-            };
+      var isChecked = function(selector) {
 
-            /*
-             * hide preloader
-             */
-            $('.progress').fadeOut();
-            $('#content').removeClass('hide');
-        })();
-    </script>
+        return $(selector).is(':checked');
+
+      };
+
+      /*
+       * hide preloader
+       */
+      $('.progress').fadeOut();
+      $('#content').removeClass('hide');
+
+    })();
+  </script>
 </body>
 </html>
 
