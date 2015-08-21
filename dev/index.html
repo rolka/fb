@@ -76,6 +76,8 @@
        * Our Globals
        */
 
+      var html = '';
+
       var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
 
       var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
@@ -116,17 +118,17 @@
       ];
 
       /*
-       * getIncompleteSlugs
-       */
-      var getIncompleteSlugs = slugs.filter(function(obj) {
-        return obj.complete === false;
-      });
-
-      /*
        * allComplete
        */
       var allComplete = function() {
-        return getIncompleteSlugs.length < 1;
+
+        for(var i = 0; i < slugs.length; i++) {
+          if(slugs[i].complete === false) {
+            return false;
+          }
+        }
+
+        return true;
       };
 
       /*
@@ -143,6 +145,17 @@
         var dateFormat = '{HH}:{mm}, {Weekday}, {d} {Month}, {yyyy}';
         return Date.create(date).format(dateFormat);
       }
+
+      /*
+       * Mark slug as complete
+       */
+      var completeSlug = function(mySlug) {
+        for(var i in slugs) {
+          if(slugs[i].slug === mySlug) {
+            slugs[i].complete = true;
+          }
+        }
+      };
 
       /*
        * template
@@ -188,8 +201,6 @@
         });
       };
 
-      var html = "";
-
       /*
        * renderTemplate
        */
@@ -209,9 +220,15 @@
       };
 
 
-      var showlAllPosts = function(data, slug){
+      var showAllPosts = function(data, slug){
+
+        // Let's first mark this slug as complete
+        completeSlug(slug);
 
         if(allComplete()) {
+
+          console.log('once');
+
           // merge all data, sort all data and
           // call the renderTemplateFunction
 
@@ -219,9 +236,7 @@
           $('.progress').fadeOut();
           $('#content').removeClass('hide');
         }
-        else {
 
-        }
       };
 
 
@@ -237,6 +252,10 @@
         }
       });
 
+      /*
+       * Kick off
+       */
+      makeAjaxCalls(slugs);
     })();
   </script>
 </body>
