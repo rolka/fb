@@ -158,19 +158,31 @@ comment out temporary
 
         var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
 
+        /*
+        * getIncompleteSlugs
+        */
         var getIncompleteSlugs = slugs.filter(function(obj) {
             return obj.complete === false;
         });
 
+        /*
+        * allComplete
+        */
         var allComplete = function() {
             return getIncompleteSlugs.length < 1;
         };
 
+        /*
+        * makeURL
+        */
         var makeURL = function(url, token, slug){
             return url.replace('{token}', token).replace('{slug}', slug);
         };
 //        console.log(makeURL(baseURL, token, 'duzenos'));
 
+        /*
+        * template
+        */
         var template =
                 "<div class='card blue-grey darken-1'>" +
                     "<div class='card-content white-text'>" +
@@ -191,6 +203,9 @@ comment out temporary
                 "</div>"
         ;
 
+        /*
+        * bindTemplate
+        */
         var bindTemplate = function(template, obj){
 
             return url.replace('{fb-image}', obj.picture)
