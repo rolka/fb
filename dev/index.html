@@ -202,8 +202,9 @@
        */
       var makeAjaxCalls = function(slugs){
 
-        // here you go, my friend :)
-
+        slugs.forEach(function(slug) {
+          makeAjax(makeURL(baseURL, token, slug.slug), showAllPosts, slug.slug);
+        });
       };
 
 
