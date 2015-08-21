@@ -158,17 +158,15 @@ comment out temporary
 
         var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
 
+        var getIncompleteSlugs = slugs.filter(function(obj) {
+            return obj.complete === false;
+        });
 
-        var allComplete = function(slugs) {
-            slugs.each(function(slug) {
-                if(!slug.complete) {
-                    return false
-                }
-            });
-
-            return true;
+        var allComplete = function() {
+            return getIncompleteSlugs.length < 1;
         };
-        console.log(allComplete(slugs));
+
+        console.log(allComplete());
 
         var showlAllPosts = function(){
             /*
