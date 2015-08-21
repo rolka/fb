@@ -186,7 +186,7 @@
        */
        var bindTemplate = function(template, obj){
 
-        return url
+        return template
           .replace('{fb-image}', obj.picture)
           .replace('{fb-post-title}', obj.description)
           .replace('{fb-post-text}', obj.message)
@@ -263,7 +263,13 @@
           // sort all data and
           var sortedData = fullData.sort(compare);
 
+          // build the html
+          sortedData.forEach(function(obj) {
+            html += bindTemplate(template, obj);
+          });
+
           // call the renderTemplateFunction
+          renderTemplate();
 
           // finally hide the progress bar
           $('.progress').fadeOut();
