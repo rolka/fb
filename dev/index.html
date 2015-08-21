@@ -85,7 +85,7 @@
 
       var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
 
-      var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
+      var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description,caption,full_picture,admin_creator,from&limit=50&access_token={token}';
 
       var slugs = [
         {
@@ -168,7 +168,7 @@
        var template = '' +
         '<div class="card blue-grey darken-1 {isEvent}">' +
           '<div class="card-content white-text">' +
-            '<span>{fb-post-date}</span>' +
+            '<span>{fb-post-date} - {fb-post-from}</span>' +
             '<div class="row">' +
               '<div class="col s2">' +
                 '<img class="responsive-img" src="{fb-image}" alt=""/>' +
@@ -192,6 +192,7 @@
         return template
           .replace('{isEvent}', obj.type === 'event' ? '' : 'not-event')
           .replace('{fb-image}', obj.picture)
+          .replace('{fb-post-from}', obj.from.name)
           .replace('{fb-post-title}', obj.description)
           .replace('{fb-post-text}', obj.message)
           .replace('{fb-post-link}', obj.link)
