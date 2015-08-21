@@ -195,6 +195,25 @@ comment out temporary
 
         };
 
+        var makeAjax = function(fbUrl, next, slug) {
+            $.ajax({
+                url: fbUrl
+            }).done(function(data) {
+                next(data, slug);
+            })
+//                    .error(function() {
+//                        swal({
+//                            title: "Oops...",
+//                            text: "Facebook page not found",
+//                            timer: 2000,
+//                            showConfirmButton: false,
+//                            type: 'error',
+//                            allowOutsideClick: true
+//                            // warning success info error
+//                        });
+//                    });
+        };
+
 
         var showlAllPosts = function(){
             /*
