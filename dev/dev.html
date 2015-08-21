@@ -49,15 +49,13 @@ comment out temporary
 
     <div class="container">
         <div class="row">
-            <form>
-                <!--checkbox to show all posts or events only-->
-                <div class="col s6">
-                    <p>
-                        <input type="checkbox" id="events-only" />
-                        <label for="events-only">Show events only</label>
-                    </p>
-                </div><!--end checkbox-->
-            </form>
+            <!--checkbox to show all posts or events only-->
+            <div class="col s6">
+                <p>
+                    <input type="checkbox" id="events-only" />
+                    <label for="events-only">Show events only</label>
+                </p>
+            </div><!--end checkbox-->
         </div>
     </div>
     <div class="container">
@@ -99,46 +97,20 @@ comment out temporary
 
         /*
         * SLUGS
-        * not sure if it's ok to put them in array
         * will be more of them
         */
 
-        var sisaidgallery = {
-            value: "sisaidgallery",
-            text: "sisaid galerija"
-        };
+        var slugs = [
+            'sisaidgallery',
+            'duzenos',
+            'bbcnews',
+            'Klaipeda.renginiai',
+            'PORTbyBarBara',
+            'Kastonas',
+            'klaipedosdramosteatras',
+            '238899589464193'
+        ];
 
-        var duzenos = {
-            value: "duzenos",
-            text: "Duženos"
-        };
-
-        var bbcnews = {
-            value: "bbcnews",
-            text: "BBC News"
-        };
-
-        var klaipedaRenginiai = {
-            value: "Klaipeda.renginiai",
-            text: "Renginiai Klaipėda"
-        };
-
-        var PORTbyBarBara = {
-            value: "PORTbyBarBara",
-            text: "PORT night club by BarBar'a"
-        };
-        var kastonas = {
-            value: "Kastonas",
-            text: "Kaštonas/ChestNut"
-        };
-        var klaipedosdramosteatras = {
-            value: "klaipedosdramosteatras",
-            text: "Klaipėdos dramos teatras"
-        };
-        var zvejuBaras = {
-            value: "238899589464193",
-            text: "Žvejų Baras"
-        };
         /* end of slugs */
 
         /*
@@ -166,17 +138,11 @@ comment out temporary
         };
 
 
-        var checkIfEventsSelected = function() {
+        var isChecked = function(selector) {
 
-            if ($("#events-only").is(':checked')) {
-                /*
-                *
-                * show events only
-                * I'm not sure if I need submit button
-                * maybe it would make more sense to update feed results on checkbox change?
-                *
-                */
-            }
+            return $(selector).is(':checked');
+            // "#events-only"
+
         };
 
 
