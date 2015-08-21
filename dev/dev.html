@@ -158,6 +158,18 @@ comment out temporary
 
         var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
 
+
+        var allComplete = function(slugs) {
+            slugs.each(function(slug) {
+                if(!slug.complete) {
+                    return false
+                }
+            });
+
+            return true;
+        };
+        console.log(allComplete(slugs));
+
         var showlAllPosts = function(){
             /*
              * Jose's comments
