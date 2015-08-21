@@ -23,6 +23,9 @@
       width: 50%;
       margin: 0 auto;
     }
+    .event-only .not-event {
+      display: none;
+    }
   </style>
 </head>
 <body>
@@ -187,7 +190,7 @@
        var bindTemplate = function(template, obj){
 
         return template
-          .replace('{isEvent}', obj.type === 'event' ? 'event' : '')
+          .replace('{isEvent}', obj.type === 'event' ? '' : 'not-event')
           .replace('{fb-image}', obj.picture)
           .replace('{fb-post-title}', obj.description)
           .replace('{fb-post-text}', obj.message)
@@ -286,9 +289,11 @@
       $('#events-only').change(function() {
         if($(this).is(':checked')) {
           // hide the non events with css
+          $('#fb-posts-wrap').addClass('event-only');
         }
         else {
           // show the non events with css
+          $('#fb-posts-wrap').removeClass('event-only');
         }
       });
 
