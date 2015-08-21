@@ -163,7 +163,7 @@
        * template
        */
        var template = '' +
-        '<div class="card blue-grey darken-1">' +
+        '<div class="card blue-grey darken-1 {isEvent}">' +
           '<div class="card-content white-text">' +
             '<span>{fb-post-date}</span>' +
             '<div class="row">' +
@@ -187,6 +187,7 @@
        var bindTemplate = function(template, obj){
 
         return template
+          .replace('{isEvent}', obj.type === 'event' ? 'event' : '')
           .replace('{fb-image}', obj.picture)
           .replace('{fb-post-title}', obj.description)
           .replace('{fb-post-text}', obj.message)
