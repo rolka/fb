@@ -78,6 +78,8 @@
 
       var html = '';
 
+      var finalData = [];
+
       var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
 
       var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description&limit=50&access_token={token}';
@@ -219,17 +221,34 @@
 
       };
 
+      /*
+       * Flatten data
+       */
+      var flattenData = function(data) {
+        var fullData = [];
+        var empty = [];
+
+        data.forEach(function(row) {
+          fullData.push(row.data);
+        });
+
+        return empty.concat.apply(empty, fullData);
+      };
 
       var showAllPosts = function(data, slug){
 
         // Let's first mark this slug as complete
         completeSlug(slug);
 
+        // And store our data
+        finalData.push(data);
+
         if(allComplete()) {
 
-          console.log('once');
+          // merge all data
+          fullData = flattenData(finalData);
 
-          // merge all data, sort all data and
+          // sort all data and
           // call the renderTemplateFunction
 
           // finally hide the progress bar
