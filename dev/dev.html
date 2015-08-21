@@ -174,6 +174,7 @@ comment out temporary
         var template =
                 "<div class='card blue-grey darken-1'>" +
                     "<div class='card-content white-text'>" +
+                        "<span>Date.create(row.created_time).format('{HH}:{mm}, {Weekday}, {d} {Month}, {yyyy}')</span>" +
                         "<div class='row'>" +
                             "<div class='col s2'>" +
                                 "<img class='responsive-img' src='{fb-image}' alt=''/>" +
@@ -189,6 +190,15 @@ comment out temporary
                     "</div>" +
                 "</div>"
         ;
+
+        var bindTemplate = function(template, obj){
+
+            return url.replace('{fb-image}', obj.picture)
+                    .replace('{fb-post-title}', obj.description)
+                    .replace('{fb-post-text}', obj.message)
+                    .replace('{fb-post-link}', obj.link);
+        };
+
 
         var showlAllPosts = function(){
             /*
