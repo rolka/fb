@@ -30,11 +30,11 @@
 <!--
 comment out temporary
 -->
-<!--<div class="progress">-->
-    <!--<div class="indeterminate"></div>-->
-<!--</div>-->
+<div class="progress">
+    <div class="indeterminate"></div>
+</div>
 
-<div class="preloader-wrap-cust "> <!--add class hide-->
+<div class="preloader-wrap-cust hide"> <!--add class hide-->
     <!--header-->
     <header>
         <nav class="top-nav">
@@ -150,6 +150,13 @@ comment out temporary
             text: "Žvejų Baras"
         };
         /* end of slugs */
+
+        /*
+        * hide preloader
+        */
+        $('.progress').fadeOut();
+        $('.preloader-wrap-cust').removeClass('hide');
+
 
         /*
         * Default- show ALL posts
