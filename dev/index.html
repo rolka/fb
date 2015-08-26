@@ -29,13 +29,16 @@
 
     .post-by{
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 25px;
     }
     .post-date{
       display: block;
     }
     .card .card-content .card-title{
       line-height: 26px;
+    }
+    img.responsive-img{
+      width: 100%;
     }
 
   </style>
@@ -199,29 +202,28 @@
 
 
       /*
-      *
-      * check
-      *
+      * checking title, text and images
       */
 
-      var checkPostTitle = function( str ){
+      var replaceUndefined = function( str ){
         return str === undefined ? '' : str;
       };
 
-
-
+      var replaceImage = function( str ){
+        return str === undefined ? 'https://placehold.it/350x150' : str;
+      };
 
       /*
        * bindTemplate
        */
-       var bindTemplate = function(template, obj, checkPostTitle){
+       var bindTemplate = function(template, obj){
 
         return template
           .replace('{isEvent}', obj.type === 'event' ? '' : 'not-event')
-          .replace('{fb-image}', obj.picture)
+          .replace('{fb-image}', replaceImage( obj.picture ))
           .replace('{fb-post-from}', obj.from.name)
-          .replace('{fb-post-title}', checkPostTitle( obj.description ))
-          .replace('{fb-post-text}', obj.message)
+          .replace('{fb-post-title}', replaceUndefined( obj.description ))
+          .replace('{fb-post-text}', replaceUndefined( obj.message ))
           .replace('{fb-post-link}', obj.link)
           .replace('{fb-post-date}', dateFormatter(obj.created_time));
 
