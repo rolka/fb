@@ -26,6 +26,15 @@
     .event-only .not-event {
       display: none;
     }
+
+    .post-by{
+      display: block;
+      margin-bottom: 10px;
+    }
+    .post-date{
+      display: block;
+    }
+
   </style>
 </head>
 <body>
@@ -166,9 +175,10 @@
        * template
        */
        var template = '' +
-        '<div class="card blue-grey darken-1 {isEvent}">' +
+        '<div class="card blue-grey darken-1 hoverable {isEvent}">' +
           '<div class="card-content white-text">' +
-            '<span>{fb-post-date} - {fb-post-from}</span>' +
+            '<span class="post-date">Posted on: {fb-post-date}</span>' +
+            '<span class="post-by">Post by: {fb-post-from}</span>' +
             '<div class="row">' +
               '<div class="col s2">' +
                 '<img class="responsive-img" src="{fb-image}" alt=""/>' +
