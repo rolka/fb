@@ -88,7 +88,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
-
+  <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
   <script>
     (function() {
 
@@ -179,6 +179,8 @@
         }
       };
 
+      var copyTextID = 100;
+
       /*
        * template
        */
@@ -191,7 +193,7 @@
               '<div class="col s2">' +
                 '<img class="responsive-img" src="{fb-image}" alt=""/>' +
               '</div>' +
-              '<div class="col s10">' +
+              '<div class="col s10" id="fb-post-text">' +
                 '<span class="card-title">{fb-post-title}</span>' +
                 '<p>{fb-post-text}</p>' +
               '</div>' +
@@ -199,6 +201,7 @@
           '</div>' +
           '<div class="card-action">' +
             '<a target="_blank" href="{fb-post-link}">Open post</a>' +
+             '<a class="waves-effect waves-light btn white-text red darken-1 hoverable" data-clipboard-target="#fb-post-text"><i class="material-icons right">subject</i>Copy</a>' +
           '</div>' +
         '</div>';
 
@@ -334,6 +337,23 @@
        */
       makeAjaxCalls(slugs);
     })();
+
+    var clipboard = new Clipboard('.btn');
+
+    clipboard.on('success', function(e) {
+      console.info('Action:', e.action);
+      console.info('Text:', e.text);
+      console.info('Trigger:', e.trigger);
+
+      e.clearSelection();
+    });
+
+    clipboard.on('error', function(e) {
+      console.error('Action:', e.action);
+      console.error('Trigger:', e.trigger);
+    });
+
+
   </script>
 </body>
 </html>
