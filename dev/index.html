@@ -88,7 +88,11 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
+  <!--<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>-->
+  <!--<script src="http://zenorocha.github.io/clipboard.js/dist/clipboard.min.js"></script>-->
+  <!--<script src="clipboard.js"></script>-->
   <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
+
   <script>
     (function() {
 
@@ -232,7 +236,6 @@
           .replace('{fb-post-text}', replaceUndefined( obj.message ))
           .replace('{fb-post-link}', obj.link)
           .replace('{fb-post-date}', dateFormatter(obj.created_time))
-//                .replace('{fb-post-id}', index)
                 .replace(/{fb-post-id}/g, obj.id);
 
       };
@@ -345,16 +348,20 @@
     var clipboard = new Clipboard('.btn');
 
     clipboard.on('success', function(e) {
+//      e.clearSelection();
+
       console.info('Action:', e.action);
       console.info('Text:', e.text);
       console.info('Trigger:', e.trigger);
 
-      e.clearSelection();
+//      showTooltip(e.trigger, 'Copied!');
     });
 
     clipboard.on('error', function(e) {
       console.error('Action:', e.action);
       console.error('Trigger:', e.trigger);
+
+//      showTooltip(e.trigger, fallbackMessage(e.action));
     });
 
 
