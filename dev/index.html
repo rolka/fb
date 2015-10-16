@@ -104,7 +104,7 @@
 
       var finalData = [];
 
-      var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
+      var token = 'CAAQYWWjo5zkBAGlqs2AxxsWKcgWEI0VM3UA7555dhCQEOCTu9VW91tpfaNvrt4tS0w8DkxPJHvRENRrMeDT9QC1aSvHdZA7nhw9ZBqZAyUhMM6PTQoJggn7pJRHEO8xQJp8lsGZAqixVU8SvrMlhUUhwmzB11h9ISqd3MvmoD4aVZBPPD1geO';
 
       var baseURL =
               'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description,caption,full_picture,id,admin_creator,from&limit=50&access_token={token}';
@@ -344,25 +344,25 @@
       makeAjaxCalls(slugs);
     })();
 
-//    initialise clipboard
-    var clipboard = new Clipboard('.btn');
-
-    clipboard.on('success', function(e) {
-//      e.clearSelection();
-
-      console.info('Action:', e.action);
-      console.info('Text:', e.text);
-      console.info('Trigger:', e.trigger);
-
-//      showTooltip(e.trigger, 'Copied!');
-    });
-
-    clipboard.on('error', function(e) {
-      console.error('Action:', e.action);
-      console.error('Trigger:', e.trigger);
-
-//      showTooltip(e.trigger, fallbackMessage(e.action));
-    });
+////    initialise clipboard
+//    var clipboard = new Clipboard('.btn');
+//
+//    clipboard.on('success', function(e) {
+////      e.clearSelection();
+//
+//      console.info('Action:', e.action);
+//      console.info('Text:', e.text);
+//      console.info('Trigger:', e.trigger);
+//
+////      showTooltip(e.trigger, 'Copied!');
+//    });
+//
+//    clipboard.on('error', function(e) {
+//      console.error('Action:', e.action);
+//      console.error('Trigger:', e.trigger);
+//
+////      showTooltip(e.trigger, fallbackMessage(e.action));
+//    });
 
 
   </script>
