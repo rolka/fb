@@ -26,6 +26,23 @@
     .event-only .not-event {
       display: none;
     }
+
+    .post-by{
+      display: block;
+      margin-bottom: 25px;
+    }
+    .post-date{
+      display: block;
+    }
+    .card .card-content .card-title{
+      line-height: 26px;
+      margin-bottom: 15px;
+      display: inline-block;
+    }
+    img.responsive-img{
+      width: 100%;
+    }
+
   </style>
 </head>
 <body>
@@ -71,6 +88,10 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sugar/1.4.1/sugar.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.0/sweetalert.min.js"></script>
+  <!--<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>-->
+  <!--<script src="http://zenorocha.github.io/clipboard.js/dist/clipboard.min.js"></script>-->
+  <!--<script src="clipboard.js"></script>-->
+  <script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
 
   <script>
     (function() {
@@ -83,9 +104,10 @@
 
       var finalData = [];
 
-      var token = 'CAAQYWWjo5zkBAKNWF2HlflTTgPSMATHC8Ecp6vZANJ5ZAUABYwilDeekf1cayODlqXNZATKv4dkwdi6PIqY3EGA2ZAEO2pvxEeD1SxwribyZCTIJz1zmBgkKnP8jEVbdhoZBt8IrbvToS9WVW3bWMWBHiLBOx5U5ZCn4xT1lIyGI3niAEaRZCa1g';
+      var token = 'CAAQYWWjo5zkBAGlqs2AxxsWKcgWEI0VM3UA7555dhCQEOCTu9VW91tpfaNvrt4tS0w8DkxPJHvRENRrMeDT9QC1aSvHdZA7nhw9ZBqZAyUhMM6PTQoJggn7pJRHEO8xQJp8lsGZAqixVU8SvrMlhUUhwmzB11h9ISqd3MvmoD4aVZBPPD1geO';
 
-      var baseURL = 'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description,caption,full_picture,admin_creator,from&limit=50&access_token={token}';
+      var baseURL =
+              'https://graph.facebook.com/v2.4/{slug}/feed?fields=picture,created_time,message,link,type,description,caption,full_picture,id,admin_creator,from&limit=50&access_token={token}';
 
       var slugs = [
         {
@@ -162,27 +184,44 @@
         }
       };
 
+      var copyTextID = 100;
+
       /*
        * template
        */
        var template = '' +
-        '<div class="card blue-grey darken-1 {isEvent}">' +
+        '<div class="card blue-grey darken-1 hoverable {isEvent}">' +
           '<div class="card-content white-text">' +
-            '<span>{fb-post-date} - {fb-post-from}</span>' +
+            '<span class="post-date">Posted on: {fb-post-date}</span>' +
+            '<span class="post-by">Post by: {fb-post-from}</span>' +
             '<div class="row">' +
               '<div class="col s2">' +
                 '<img class="responsive-img" src="{fb-image}" alt=""/>' +
               '</div>' +
-              '<div class="col s10">' +
+              '<div class="col s10" id="post-target-{fb-post-id}">' +
                 '<span class="card-title">{fb-post-title}</span>' +
                 '<p>{fb-post-text}</p>' +
               '</div>' +
             '</div>' +
           '</div>' +
           '<div class="card-action">' +
-            '<a href="{fb-post-link}">Open post</a>' +
+            '<a target="_blank" href="{fb-post-link}">Open post</a>' +
+             '<a class="waves-effect waves-light btn white-text red darken-1 hoverable" data-clipboard-target="#post-target-{fb-post-id}"><i class="material-icons right">subject</i>Copy</a>' +
           '</div>' +
         '</div>';
+
+
+      /*
+      * checking title, text and images
+      */
+
+      var replaceUndefined = function( str ){
+        return str === undefined ? '' : str;
+      };
+
+      var replaceImage = function( str ){
+        return str === undefined ? 'https://placehold.it/350x150' : str;
+      };
 
       /*
        * bindTemplate
@@ -191,12 +230,13 @@
 
         return template
           .replace('{isEvent}', obj.type === 'event' ? '' : 'not-event')
-          .replace('{fb-image}', obj.picture)
+          .replace('{fb-image}', replaceImage( obj.picture ))
           .replace('{fb-post-from}', obj.from.name)
-          .replace('{fb-post-title}', obj.description)
-          .replace('{fb-post-text}', obj.message)
+          .replace('{fb-post-title}', replaceUndefined( obj.description ))
+          .replace('{fb-post-text}', replaceUndefined( obj.message ))
           .replace('{fb-post-link}', obj.link)
-          .replace('{fb-post-date}', dateFormatter(obj.created_time));
+          .replace('{fb-post-date}', dateFormatter(obj.created_time))
+                .replace(/{fb-post-id}/g, obj.id);
 
       };
 
@@ -303,6 +343,28 @@
        */
       makeAjaxCalls(slugs);
     })();
+
+////    initialise clipboard
+//    var clipboard = new Clipboard('.btn');
+//
+//    clipboard.on('success', function(e) {
+////      e.clearSelection();
+//
+//      console.info('Action:', e.action);
+//      console.info('Text:', e.text);
+//      console.info('Trigger:', e.trigger);
+//
+////      showTooltip(e.trigger, 'Copied!');
+//    });
+//
+//    clipboard.on('error', function(e) {
+//      console.error('Action:', e.action);
+//      console.error('Trigger:', e.trigger);
+//
+////      showTooltip(e.trigger, fallbackMessage(e.action));
+//    });
+
+
   </script>
 </body>
 </html>
