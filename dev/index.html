@@ -277,8 +277,8 @@
         return empty.concat.apply(empty, fullData);
       };
 
-      var compare = function(a, b) {
-        return a.last_nom > b.last_nom;
+      var compare = function(obj) {
+        return obj.created_time;
       }
 
       var showAllPosts = function(data, slug) {
@@ -289,11 +289,12 @@
         finalData.push(data);
 
         if(allComplete()) {
+
           // merge all data
           var fullData = flattenData(finalData);
 
           // sort all data and
-          var sortedData = fullData.sort(compare);
+          var sortedData = fullData.sortBy(compare).reverse();
 
           // build the html
           sortedData.forEach(function(obj) {
